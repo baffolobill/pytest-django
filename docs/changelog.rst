@@ -7,6 +7,8 @@ unreleased
 Features
 ^^^^^^^^
 
+* Added a new option `--no-foce-no-debug` to avoid forcing of DEBUG setting to False (bubenkoff) (Based on: https://github.com/aexeagmbh/pytest-django/commit/513ea9d70d2dda30c09e8b6ba0c7acef5a2d2e7c)
+
 * Added new fixture :fixture:`django_assert_max_num_queries` (#547).
 * Added support for ``connection`` and returning the wrapped context manager
   with :fixture:`django_assert_num_queries` (#547).

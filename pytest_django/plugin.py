@@ -87,6 +87,9 @@ def pytest_addoption(parser):
     parser.addini(INVALID_TEMPLATE_VARS_ENV,
                   'Fail for invalid variables in templates.',
                   type='bool', default=False)
+    group._addoption('--no-force-no-debug',
+                     action='store_true', dest='noforcenodebug', default=False,
+                     help='Disable forcing DEBUG setting to False on test setup')
 
 
 PROJECT_FOUND = ('pytest-django found a Django project in %s '
@@ -359,7 +362,8 @@ def django_test_environment(request):
         from django.conf import settings as dj_settings
         from django.test.utils import (setup_test_environment,
                                        teardown_test_environment)
-        dj_settings.DEBUG = False
+        if not request.config.getvalue('noforcenodebug'):
+            dj_settings.DEBUG = False
         setup_test_environment()
         request.addfinalizer(teardown_test_environment)
 
